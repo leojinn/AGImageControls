@@ -30,6 +30,12 @@ class AGImageEditorMainMenuCollectionViewCell: AGMainCollectionViewCell {
 
         self.configureTitleLabel(menuItem: imageEditorItem)
     }
+    
+    override func setupCollectionViewCell() {
+        self.contentView.addSubview(titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        setupConstraints()
+    }
 }
 
 extension AGImageEditorMainMenuCollectionViewCell
@@ -39,11 +45,5 @@ extension AGImageEditorMainMenuCollectionViewCell
         self.titleLabel.textColor = menuItem.isSelected ? menuItem.selectedTextColor : menuItem.textColor
         self.titleLabel.text = menuItem.name
         self.titleLabel.isHidden = menuItem.isHidden
-    }
-    
-    override func setupCollectionViewCell() {
-        self.contentView.addSubview(titleLabel)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        setupConstraints()
     }
 }

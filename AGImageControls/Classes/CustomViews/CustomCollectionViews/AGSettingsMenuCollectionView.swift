@@ -53,10 +53,7 @@ class AGSettingsMenuCollectionView: AGMainCollectionView {
             self.selectedIndexPath = indexPath
         }
     }
-}
-
-extension AGSettingsMenuCollectionView {
-
+    
     override func registerCollectionViewCells () {
         self.register(AGSettingsMenuCollectionViewCell.self, forCellWithReuseIdentifier: AGSettingsMenuCollectionViewCell.id)
     }
@@ -81,7 +78,6 @@ extension AGSettingsMenuCollectionView {
         self.settingsMenuDelegate?.selectedMenuItem(atIndexPath: indexPath)
         self.unselectCell(selectedIndexPath: indexPath)
     }
-    
 }
 
 extension AGSettingsMenuCollectionView {

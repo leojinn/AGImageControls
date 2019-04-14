@@ -40,10 +40,8 @@ class AGFontEditorCollectionView: AGMainCollectionView {
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-    }    
-}
-
-extension AGFontEditorCollectionView {
+    }
+    
     
     override func registerCollectionViewCells () {
         self.register(AGFontEditorCollectionViewCell.self, forCellWithReuseIdentifier: AGFontEditorCollectionViewCell.id)

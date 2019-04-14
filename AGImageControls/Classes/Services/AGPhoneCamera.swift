@@ -41,10 +41,10 @@ class AGPhoneCamera {
     func setupDevices() {
         // Input
         AVCaptureDevice
-            .devices().flatMap {
-                return $0 as? AVCaptureDevice
+            .devices().compactMap {
+                return $0
             }.filter {
-                return $0.hasMediaType(AVMediaTypeVideo)
+                return $0.hasMediaType(AVMediaType(rawValue: convertFromAVMediaType(AVMediaType.video)))
             }.forEach {
                 switch $0.position {
                 case .front:
@@ -76,7 +76,7 @@ class AGPhoneCamera {
     // MARK: - Permission
     
     func checkPermission() {
-        let status = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+        let status = AVCaptureDevice.authorizationStatus(for: AVMediaType(rawValue: convertFromAVMediaType(AVMediaType.video)))
         
         switch status {
         case .authorized:
@@ -89,7 +89,7 @@ class AGPhoneCamera {
     }
     
     func requestPermission() {
-        AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo) { granted in
+        AVCaptureDevice.requestAccess(for: AVMediaType(rawValue: convertFromAVMediaType(AVMediaType.video))) { granted in
             DispatchQueue.main.async {
                 if granted {
                     self.start()
@@ -159,7 +159,7 @@ class AGPhoneCamera {
     }
     
     func takePhoto(_ previewLayer: AVCaptureVideoPreviewLayer, location: CLLocation?, completion: (() -> Void)? = nil) {
-        guard let connection = stillImageOutput?.connection(withMediaType: AVMediaTypeVideo) else { return }
+        guard let connection = stillImageOutput?.connection(with: AVMediaType(rawValue: convertFromAVMediaType(AVMediaType.video))) else { return }
         
         connection.videoOrientation = AGCameraHelper.videoOrientation()
         
@@ -187,14 +187,14 @@ class AGPhoneCamera {
             let request = PHAssetChangeRequest.creationRequestForAsset(from: image)
             request.creationDate = Date()
             request.location = location
-        }, completionHandler: { _ in
+        }) { (completed, error) in
             DispatchQueue.main.async {
                 completion?()
             }
-        })
+        }
     }
     
-    func flash(_ mode: AVCaptureFlashMode) {
+    func flash(_ mode: AVCaptureDevice.FlashMode) {
         guard let device = currentInput?.device, device.isFlashModeSupported(mode) else { return }
         
         queue.async {
@@ -205,7 +205,7 @@ class AGPhoneCamera {
     }
     
     func focus(_ point: CGPoint) {
-        guard let device = currentInput?.device, device.isFocusModeSupported(AVCaptureFocusMode.locked) else { return }
+        guard let device = currentInput?.device, device.isFocusModeSupported(AVCaptureDevice.FocusMode.locked) else { return }
         queue.async {
             self.lock {
                 device.focusPointOfInterest = point
@@ -231,8 +231,8 @@ class AGPhoneCamera {
     // MARK: - Preset
     func configurePreset(_ input: AVCaptureDeviceInput) {
         for asset in preferredPresets() {
-            if input.device.supportsAVCaptureSessionPreset(asset) && self.session.canSetSessionPreset(asset) {
-                self.session.sessionPreset = asset
+            if input.device.supportsSessionPreset(AVCaptureSession.Preset(rawValue: asset)) && self.session.canSetSessionPreset(AVCaptureSession.Preset(rawValue: asset)) {
+                self.session.sessionPreset = AVCaptureSession.Preset(rawValue: asset)
                 return
             }
         }
@@ -240,9 +240,19 @@ class AGPhoneCamera {
     
     func preferredPresets() -> [String] {
         return [
-            AVCaptureSessionPresetHigh,
-            AVCaptureSessionPresetMedium,
-            AVCaptureSessionPresetLow
+            convertFromAVCaptureSessionPreset(AVCaptureSession.Preset.high),
+            convertFromAVCaptureSessionPreset(AVCaptureSession.Preset.medium),
+            convertFromAVCaptureSessionPreset(AVCaptureSession.Preset.low)
         ]
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromAVMediaType(_ input: AVMediaType) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromAVCaptureSessionPreset(_ input: AVCaptureSession.Preset) -> String {
+	return input.rawValue
 }

@@ -135,6 +135,16 @@ class AGImageEditorViewController: AGMainViewController {
     func undoLastChangesForType (type : AGSettingMenuItemTypes) {
         self.editorService.undoLastChangesForType(type: type)
     }
+    
+    override func navigationViewDoneButtonDidTouch (view : AGNavigationView) {
+        self.editorService.addNewImageItem(imageView: self.selectedEditableImageView)
+        self.close()
+    }
+    
+    override func navigationViewBackButtonDidTouch(view: AGNavigationView) {
+        self.selectedEditableImageView?.undoImageChanges()
+        self.close()
+    }
 }
 
 extension AGImageEditorViewController
@@ -162,16 +172,6 @@ extension AGImageEditorViewController
         }
         self.view.addAndPin(view: self.textEditor)
         self.setupConstraints()
-    }
-    
-    override func navigationViewDoneButtonDidTouch (view : AGNavigationView) {
-        self.editorService.addNewImageItem(imageView: self.selectedEditableImageView)
-        self.close()
-    }
-
-    override func navigationViewBackButtonDidTouch(view: AGNavigationView) {
-        self.selectedEditableImageView?.undoImageChanges()
-        self.close()
     }
     
     fileprivate func close () {
@@ -235,7 +235,7 @@ extension AGImageEditorViewController
         }
     }
     
-    func rotateEditableImageView (_ rotateRotationGestureRecognizer : UIRotationGestureRecognizer) {
+    @objc func rotateEditableImageView (_ rotateRotationGestureRecognizer : UIRotationGestureRecognizer) {
         switch rotateRotationGestureRecognizer.state {
         case .began:
             rotateRotationGestureRecognizer.rotation = self.selectedEditableImageView?.newPosition?.rotateAngle ?? 0
@@ -248,7 +248,7 @@ extension AGImageEditorViewController
         }
     }
     
-    func zoomEditableImageView (_ zoomPinchGestureRecognizer : UIPinchGestureRecognizer) {
+    @objc func zoomEditableImageView (_ zoomPinchGestureRecognizer : UIPinchGestureRecognizer) {
         switch zoomPinchGestureRecognizer.state {
         case .began:
             zoomPinchGestureRecognizer.scale = self.selectedEditableImageView?.newPosition?.scale ?? 1

@@ -19,7 +19,7 @@ class AGMainCollectionView: UICollectionView {
         return flowLayout
     }
     
-    class func collectionViewScrollDirection () -> UICollectionViewScrollDirection {
+    class func collectionViewScrollDirection () -> UICollectionView.ScrollDirection {
         return .horizontal
     }
 
@@ -36,9 +36,6 @@ class AGMainCollectionView: UICollectionView {
     func hide (isHidden : Bool) {
         self.hideWithAnimation (isHidden: isHidden)
     }
-}
-
-extension AGMainCollectionView {
     
     func setupCollectionView () {
         self.dataSource = self
@@ -49,7 +46,7 @@ extension AGMainCollectionView {
     }
     
     func registerCollectionViewCells () {
-    
+        
     }
     
     func cellSize(atIndexPath : IndexPath) -> CGSize {

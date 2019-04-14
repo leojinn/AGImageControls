@@ -101,7 +101,7 @@ class AGImageAdjustmentView: UIView {
         self.showWithAnimation(isShown: toShow, animated: withAnimation)
     }
     
-    func sliderValueChanged (_ slider : UISlider) {
+    @objc func sliderValueChanged (_ slider : UISlider) {
         guard let item = self.selectedItem else { return }
         
         self.sliderValueLabel.text = "\(Int(slider.value))"
@@ -112,14 +112,14 @@ class AGImageAdjustmentView: UIView {
         }
     }
     
-    func okButtonDidTouch (_ button : UIButton) {
+    @objc func okButtonDidTouch (_ button : UIButton) {
         guard let item = self.selectedItem else { return }
         self.collectionView.reloadData()
         self.showSlider(isHidden: true)
         self.delegate?.applyFilterButtonDidTouch(view: self, adjustmentItem: item, value: Int(item.currentValue))
     }
     
-    func cancelButtonDidTouch (_ button : UIButton) {
+    @objc func cancelButtonDidTouch (_ button : UIButton) {
         guard let item = self.selectedItem else { return }
         item.currentValue = (item.lastValue == item.defaultValue) ? item.defaultValue : item.lastValue
         self.delegate?.updateImageAdjustment(view: self, adjustmentItem: item, value: Int(item.defaultValue))
@@ -132,8 +132,8 @@ extension AGImageAdjustmentView
 {
     fileprivate func configureImageAdjustmentView() {
         [cancelButton, okButton, sliderValueLabel, slider, collectionView].forEach {
-            self.addSubview($0 as! UIView)
-            ($0 as! UIView).translatesAutoresizingMaskIntoConstraints = false
+            self.addSubview($0 )
+            ($0 ).translatesAutoresizingMaskIntoConstraints = false
         }
         self.setupConstraints()
     }
@@ -151,7 +151,7 @@ extension AGImageAdjustmentView
     {
         self.collectionView.hide(isHidden: !isHidden)
         [cancelButton, okButton, sliderValueLabel, slider].forEach {
-            ($0 as! UIView).showWithAnimation(isShown: !isHidden, animated: true)
+            ($0 ).showWithAnimation(isShown: !isHidden, animated: true)
 //            self.showWithAnimation(view: $0, toShow: !isHidden, animated: true)
         }
     }

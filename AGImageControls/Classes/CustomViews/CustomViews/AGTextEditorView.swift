@@ -61,16 +61,16 @@ class AGTextEditorView: UIView {
     }
     
     func subscribeToKeyboardNotification () {
-        NotificationCenter.default.addObserver(self, selector: #selector(AGTextEditorView.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AGTextEditorView.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
     func removeKeyboardNotificationObserver () {
         NotificationCenter.default.removeObserver(self)
     }
     
-    func keyboardWillShow (_ notification: NSNotification) {
+    @objc func keyboardWillShow (_ notification: NSNotification) {
         guard let userInfo = notification.userInfo else { return }
-        guard let keyboardSize = userInfo[UIKeyboardFrameBeginUserInfoKey] as? CGRect else { return }
+        guard let keyboardSize = userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as? CGRect else { return }
         
         let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
         self.textView.contentInset = contentInsets
@@ -108,8 +108,8 @@ extension AGTextEditorView
         self.backgroundColor = UIColor.init(white: 0.0, alpha: 0.4)
         self.subscribeToKeyboardNotification()
         [navigationView, textView].forEach{
-            ($0 as! UIView).translatesAutoresizingMaskIntoConstraints = false
-            self.addSubview($0 as! UIView)
+            ($0 ).translatesAutoresizingMaskIntoConstraints = false
+            self.addSubview($0 )
         }
         self.setupConstraints()
     }
@@ -158,7 +158,7 @@ extension AGTextEditorView : UITextViewDelegate
             return true
         }
 
-        if (textView.text.characters.count >= 200 && text != "") || (text == " " || text == "") && textView.tag == 0 {
+        if (textView.text.count >= 200 && text != "") || (text == " " || text == "") && textView.tag == 0 {
             return false
         }
         self.configureEditMode()

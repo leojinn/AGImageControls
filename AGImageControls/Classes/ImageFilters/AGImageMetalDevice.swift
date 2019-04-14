@@ -20,7 +20,7 @@ internal class AGImageMetalDevice: AGImageDevice {
     
     internal override init() {
         self.device = MTLCreateSystemDefaultDevice()!
-        self.commandQueue = self.device.makeCommandQueue()
+        self.commandQueue = self.device.makeCommandQueue()!
         super.init()
     }
     
@@ -36,7 +36,7 @@ internal class AGImageMetalDevice: AGImageDevice {
         
         let memorySize = width * height * 4
         let memoryPool = UnsafeMutablePointer<UInt8>.allocate(capacity: memorySize)
-        defer { memoryPool.deallocate(capacity: memorySize) }
+        defer { memoryPool.deallocate() }
         memset(memoryPool, 0, memorySize)
         
         let bitmapContext = CGContext(
@@ -97,7 +97,7 @@ internal class AGImageMetalDevice: AGImageDevice {
         )
         
         let texture = self.device.makeTexture(descriptor: descriptor)
-        texture.replace(
+        texture?.replace(
             region: MTLRegionMake2D(0, 0, width, height),
             mipmapLevel: 0,
             withBytes: memoryPool,
@@ -146,7 +146,7 @@ internal class AGImageMetalDevice: AGImageDevice {
         
         let memorySize = width * height * 4
         let memoryPool = UnsafeMutablePointer<UInt8>.allocate(capacity: memorySize)
-        defer { memoryPool.deallocate(capacity: memorySize) }
+        defer { memoryPool.deallocate() }
         
         texture.getBytes(
             memoryPool,

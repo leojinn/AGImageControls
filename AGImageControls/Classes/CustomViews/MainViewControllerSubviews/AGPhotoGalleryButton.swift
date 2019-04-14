@@ -65,7 +65,7 @@ class AGPhotoGalleryButton: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func handleTapGestureRecognizer (_ gestureRecognizer : UITapGestureRecognizer) {
+    @objc func handleTapGestureRecognizer (_ gestureRecognizer : UITapGestureRecognizer) {
         self.delegate?.photoGalleryButtonDidTouch(photoGalleryButton: self)
     }
 }

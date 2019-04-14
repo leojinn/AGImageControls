@@ -43,16 +43,15 @@ class AGPhotoResizeViewController: AGMainViewController {
         self.configurePhotoEditorViewController()
     }
     
-}
-
-extension AGPhotoResizeViewController
-{
     override func navigationViewDoneButtonDidTouch (view : AGNavigationView) {
         self.cropImageToVisibleRect()
         self.cropToMaxScaleSize()
         self.showImageEditingViewController()
     }
-    
+}
+
+extension AGPhotoResizeViewController
+{
     fileprivate func loadImage(atIndex index : Int) {
         self.activityViewAnimated(isAnimated: true)
         AGPhotoGalleryService.sharedInstance.resolveAsset(AGPhotoGalleryService.sharedInstance.assets[index]) {[weak self] (image) in
@@ -67,8 +66,8 @@ extension AGPhotoResizeViewController
         self.view.backgroundColor = self.configurator.mainColor
         
         [scrollView, navigationView, activityView].forEach {
-            ($0 as! UIView).translatesAutoresizingMaskIntoConstraints = false
-            self.view.addSubview($0 as! UIView)
+            ($0 ).translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview($0 )
         }
         self.setupConstraints()
     }

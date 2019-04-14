@@ -118,7 +118,7 @@ class AGImageEditorService : NSObject
             return
         }
         self.delegate?.undoLastChanges(imageChangesItem: changes)
-        if let index = self.imageChangesStack.index(of: changes) {
+        if let index = self.imageChangesStack.firstIndex(of: changes) {
             self.imageChangesStack.remove(at: index)
         }
     }
@@ -129,7 +129,7 @@ class AGImageEditorService : NSObject
         }
         let imageViewChangesStack : [AGImageChangesItem] = self.imageChangesStack.filter{ $0.tag == imageView.tag }
         imageViewChangesStack.forEach {
-            if let index = self.imageChangesStack.index(of: $0) {
+            if let index = self.imageChangesStack.firstIndex(of: $0) {
                 self.imageChangesStack.remove(at: index)
             }
         }

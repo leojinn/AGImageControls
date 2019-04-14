@@ -32,14 +32,10 @@ class AGShapesMenuCollectionViewCell: AGMainCollectionViewCell {
 
         self.shapeImageView.image = AGAppResourcesService.getImage(imageName)
     }
-}
-
-extension AGShapesMenuCollectionViewCell {
     
-    override func setupCollectionViewCell() {        
+    override func setupCollectionViewCell() {
         self.contentView.addSubview(shapeImageView)
         shapeImageView.translatesAutoresizingMaskIntoConstraints = false
         setupConstraints()
     }
-    
 }

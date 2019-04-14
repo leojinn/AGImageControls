@@ -43,9 +43,6 @@ class AGColorEditorCollectionView: AGMainCollectionView {
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-}
-
-extension AGColorEditorCollectionView {
     
     override func registerCollectionViewCells () {
         self.register(AGColorEditorCollectionViewCell.self, forCellWithReuseIdentifier: AGColorEditorCollectionViewCell.id)
@@ -77,11 +74,10 @@ extension AGColorEditorCollectionView {
             self.colorDidChange(indexPath: ip)
         }
     }
-
+    
     fileprivate func colorDidChange (indexPath : IndexPath) {
         self.colorEditorCollectionViewDelegate?.colorChanged(colorEditorCollectionView: self, colorIndex: indexPath.row)
         self.isUserInteractionEnabled = true
     }
-    
 }
 

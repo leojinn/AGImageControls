@@ -38,9 +38,7 @@ class AGPhotoGalleryCollectionView: AGMainCollectionView {
             flowLayout.minimumLineSpacing = 0
         return flowLayout
     }
-}
-
-extension AGPhotoGalleryCollectionView {
+    
     
     override func registerCollectionViewCells() {
         self.register(AGPhotoGalleryCollectionViewCell.self, forCellWithReuseIdentifier: AGPhotoGalleryCollectionViewCell.id)
@@ -65,4 +63,9 @@ extension AGPhotoGalleryCollectionView {
     override func didSelectItemAtIndexPath (indexPath : IndexPath) {
         self.photoGalleryDelegate?.selectedPhoto(atIndexPath: indexPath)
     }
+}
+
+extension AGPhotoGalleryCollectionView {
+    
+    
 }

@@ -60,6 +60,14 @@ class AGSettingsMenuCollectionViewCell: AGMainCollectionViewCell {
     func unselect () {
         self.hideUnderlineView(isHidden: true)
     }
+    
+    override func setupCollectionViewCell() {
+        [imageView, underlineView].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            contentView.addSubview($0)
+        }
+        setupConstraints()
+    }
 }
 
 extension AGSettingsMenuCollectionViewCell
@@ -76,14 +84,6 @@ extension AGSettingsMenuCollectionViewCell
             guard let `self` = self else { return }
             self.underlineView.isHidden = isHidden
         }
-    }
-    
-    override func setupCollectionViewCell() {
-        [imageView, underlineView].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            contentView.addSubview($0)
-        }
-        setupConstraints()
     }
     
 }

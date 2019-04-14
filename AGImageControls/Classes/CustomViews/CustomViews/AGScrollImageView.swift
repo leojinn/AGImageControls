@@ -123,15 +123,15 @@ extension AGScrollImageView
         let w = contentSize.width
         let W = containerSize.width
         
-        let scale1 = (H*cos(fabs(angle)) + W*sin(fabs(angle)))/h
-        let scale2 = (H*sin(fabs(angle)) + W*cos(fabs(angle)))/w
+        let scale1 = (H*cos(abs(angle)) + W*sin(abs(angle)))/h
+        let scale2 = (H*sin(abs(angle)) + W*cos(abs(angle)))/w
         
         let scaleFactor = max(scale1, scale2)
         return scaleFactor
     }
     
     func rotateImageViewByAngle (angle : CGFloat) {
-        let angleRad = AGMathHelper.rad(fromDegrees: fabs(angle))
+        let angleRad = AGMathHelper.rad(fromDegrees: abs(angle))
         
         let scaledFactor = self.scaleToFill(containerSize: self.bounds.size,
                                             contentSize: self.imageView.bounds.size,

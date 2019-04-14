@@ -35,7 +35,7 @@ internal class AGContrastFilter: AGImageFilter {
                 length: size,
                 options: options
             )
-            commandEncoder.setBuffer(buffer, offset: 0, at: i)
+            commandEncoder.setBuffer(buffer, offset: 0, index: i)
         }
         
         return super.processMetal(device, commandBuffer, commandEncoder)

@@ -26,14 +26,14 @@ internal class AGImageFilter {
     internal func process(device: AGImageDevice) -> Bool {
         guard let device = device as? AGImageMetalDevice else { return false }
         
-        let commandBuffer = device.commandQueue.makeCommandBuffer()
-        let commandEncoder = commandBuffer.makeComputeCommandEncoder()
+        guard let commandBuffer = device.commandQueue.makeCommandBuffer() else { return false }
+        guard let commandEncoder = commandBuffer.makeComputeCommandEncoder() else { return false }
         
         if let pipeline = self.metalPipeline as? MTLComputePipelineState {
             commandEncoder.setComputePipelineState(pipeline)
             
-            commandEncoder.setTexture(device.outputTexture!, at: 0)
-            commandEncoder.setTexture(device.texture!, at: 1)
+            commandEncoder.setTexture(device.outputTexture!, index: 0)
+            commandEncoder.setTexture(device.texture!, index: 1)
         }
         
         let retValue = self.processMetal(device, commandBuffer, commandEncoder)

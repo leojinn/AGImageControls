@@ -55,7 +55,7 @@ class AGFontEditorView: UIView {
             if (!self.isHidden) { return }
             let fonts = self.dataSource?.fontEditorItems().filter{ $0.fullName == item.fullName }
             if let firstFont = fonts?.first {
-                if let index = self.dataSource?.fontEditorItems().index(of: firstFont) {
+                if let index = self.dataSource?.fontEditorItems().firstIndex(of: firstFont) {
                     self.collectionView.scrollToItem(at: IndexPath.init(row: index, section: 0), at: .centeredHorizontally, animated: !self.isHidden)
                 }
             }
@@ -80,8 +80,8 @@ extension AGFontEditorView
 {
     fileprivate func configureFontEditorView() {
         [collectionView, titleLabel].forEach {
-            self.addSubview($0 as! UIView)
-            ($0 as! UIView).translatesAutoresizingMaskIntoConstraints = false
+            self.addSubview($0 )
+            ($0 ).translatesAutoresizingMaskIntoConstraints = false
         }
         self.setupConstraints()
     }

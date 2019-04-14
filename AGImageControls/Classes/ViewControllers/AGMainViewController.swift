@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class AGMainViewController: UIViewController {
+open class AGMainViewController: UIViewController, AGNavigationViewDelegate {
 
     var navigationViewTopConstraint : NSLayoutConstraint? = nil
    
@@ -32,7 +32,7 @@ open class AGMainViewController: UIViewController {
     
     lazy var activityView: UIActivityIndicatorView = { [unowned self] in
         let view = UIActivityIndicatorView()
-            view.activityIndicatorViewStyle = .whiteLarge
+            view.style = .whiteLarge
             view.alpha = 0.0
         return view
     }()
@@ -77,16 +77,13 @@ open class AGMainViewController: UIViewController {
             self.activityView.alpha = isAnimated ? 1.0 : 0.0
         })
     }
-}
-
-extension AGMainViewController : AGNavigationViewDelegate
-{
+    
     func navigationViewBackButtonDidTouch (view : AGNavigationView) {
         self.dismiss(animated: true, completion: nil)
     }
     
     func navigationViewDoneButtonDidTouch (view : AGNavigationView)
     {
-
+        
     }
 }

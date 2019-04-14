@@ -144,19 +144,19 @@ class AGImageMasksView: UIView {
     }
     
     //MARK: Button actions
-    func addNewImageButtonDidTouch (_ button : UIButton) {
+    @objc func addNewImageButtonDidTouch (_ button : UIButton) {
         self.showMenu(isShown : true)
     }
     
-    func undoButtonDidTouch (_ button : UIButton) {
+    @objc func undoButtonDidTouch (_ button : UIButton) {
         self.delegate?.undoLastChanges(settingsType: self.type)
     }
     
-    func captionTextButtonDidTouch (_ button : UIButton) {
+    @objc func captionTextButtonDidTouch (_ button : UIButton) {
         self.delegate?.imageMaskDidSelectAtIndexPath(indexPath: nil, settingType : self.type, editorType : .captionText)
     }
     
-    func detailsTextButtonDidTouch (_ button : UIButton) {
+    @objc func detailsTextButtonDidTouch (_ button : UIButton) {
         self.delegate?.imageMaskDidSelectAtIndexPath(indexPath: nil, settingType : self.type, editorType: .detailsText)
     }
 }
@@ -165,8 +165,8 @@ extension AGImageMasksView
 {
     fileprivate func configureImageMasksView() {
         [addNewImageButton, undoButton, captionTextButton, detailsTextButton, captionTitleLabel, detailsTitleLabel, shapesMenuCollectionView].forEach {
-            self.addSubview($0 as! UIView)
-            ($0 as! UIView).translatesAutoresizingMaskIntoConstraints = false
+            self.addSubview($0 )
+            ($0 ).translatesAutoresizingMaskIntoConstraints = false
         }
         self.setupConstraints()
     }

@@ -25,9 +25,6 @@ class AGImageAdjustmentCollectionView: AGMainCollectionView {
     struct ViewSizes {
         static let height: CGFloat = AGImageAdjustmentCollectionViewCell.cellSize().height
     }
-}
-
-extension AGImageAdjustmentCollectionView {
     
     override func registerCollectionViewCells() {
         self.register(AGImageAdjustmentCollectionViewCell.self, forCellWithReuseIdentifier: AGImageAdjustmentCollectionViewCell.id)

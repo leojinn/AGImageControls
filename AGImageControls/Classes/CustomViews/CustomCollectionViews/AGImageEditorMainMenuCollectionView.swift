@@ -40,11 +40,6 @@ class AGImageEditorMainMenuCollectionView: AGMainCollectionView {
         self.selectedIndexPath = nil
         self.reloadData()
     }
-}
-
-//MARK: Private methods
-
-extension AGImageEditorMainMenuCollectionView {
     
     override func registerCollectionViewCells() {
         self.register(AGImageEditorMainMenuCollectionViewCell.self, forCellWithReuseIdentifier: AGImageEditorMainMenuCollectionViewCell.id)

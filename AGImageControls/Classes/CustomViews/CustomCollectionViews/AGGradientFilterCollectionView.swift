@@ -24,16 +24,12 @@ class AGGradientFilterCollectionView: AGMainCollectionView {
     
     struct ViewSizes {
         static let height: CGFloat = AGGradientFilterCollectionViewCell.cellSize().height
-    }        
-}
-
-//MARK: Private methods
-
-extension AGGradientFilterCollectionView {
+    }
+    
     override func registerCollectionViewCells() {
         self.register(AGGradientFilterCollectionViewCell.self, forCellWithReuseIdentifier: AGGradientFilterCollectionViewCell.id)
     }
-        
+    
     override func cellSize(atIndexPath : IndexPath) -> CGSize {
         return AGGradientFilterCollectionViewCell.cellSize()
     }
@@ -49,7 +45,7 @@ extension AGGradientFilterCollectionView {
     override func objectAt (indexPath : IndexPath) -> Any? {
         return self.gradientFilterDataSource?.menuItemAtIndexPath(indexPath: indexPath)
     }
-
+    
     override func didSelectItemAtIndexPath (indexPath : IndexPath) {
         self.gradientFilterDelegate?.selectedItem(atIndexPath: indexPath)
     }

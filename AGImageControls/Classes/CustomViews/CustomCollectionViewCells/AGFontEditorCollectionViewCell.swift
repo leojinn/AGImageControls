@@ -30,14 +30,10 @@ class AGFontEditorCollectionViewCell: AGMainCollectionViewCell{
         self.fontNameLabel.font = fontItem.font.withSize(self.fontNameLabel.font.pointSize)
         self.fontNameLabel.text = fontItem.shortName
     }
-}
-
-extension AGFontEditorCollectionViewCell {
     
     override func setupCollectionViewCell() {
         self.contentView.addSubview(fontNameLabel)
         fontNameLabel.translatesAutoresizingMaskIntoConstraints = false
         setupConstraints()
     }
-    
 }

@@ -35,7 +35,7 @@ internal class AGImageDevice {
     }
     internal var cgImage: CGImage?
     
-    internal var imageOrientation: UIImageOrientation = .up
+    internal var imageOrientation: UIImage.Orientation = .up
     
     internal var imageScale: CGFloat = 1.0
     

@@ -48,8 +48,8 @@ extension AGPhotoGalleryViewController
         self.view.backgroundColor = self.configurator.mainColor
         self.navigationView.doneButton.isHidden = true
         [photoGalleryCollectionView, navigationView].forEach {
-            ($0 as! UIView).translatesAutoresizingMaskIntoConstraints = false
-            self.view.addSubview($0 as! UIView)
+            ($0 ).translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview($0 )
         }
         self.setupConstraints()
     }

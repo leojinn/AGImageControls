@@ -31,12 +31,8 @@ class AGPhotoGalleryCollectionViewCell: AGMainCollectionViewCell
         }
         self.imageView.image = image
     }
-}
-
-extension AGPhotoGalleryCollectionViewCell {
     
     override func setupCollectionViewCell() {
         setupConstraints()
     }
-    
 }

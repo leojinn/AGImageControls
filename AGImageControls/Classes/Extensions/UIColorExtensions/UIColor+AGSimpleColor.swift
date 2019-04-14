@@ -28,9 +28,9 @@ extension UIColor {
         
         if hexString.hasPrefix("#") {
             let start = hexString.index(hexString.startIndex, offsetBy: 1)
-            let hexColor = hexString.substring(from: start)
+            let hexColor = String(hexString[start...])
             
-            if hexColor.characters.count == 6 {
+            if hexColor.count == 6 {
                 let scanner = Scanner(string: hexColor)
                 var hexNumber: UInt64 = 0
                 

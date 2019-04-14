@@ -26,14 +26,10 @@ class AGColorEditorCollectionViewCell: AGMainCollectionViewCell {
         
         self.colorView.backgroundColor = colorItem.color
     }
-}
-
-extension AGColorEditorCollectionViewCell {
-   
+    
     override func setupCollectionViewCell() {
         self.contentView.addSubview(colorView)
         colorView.translatesAutoresizingMaskIntoConstraints = false
         setupConstraints()
     }
-    
 }

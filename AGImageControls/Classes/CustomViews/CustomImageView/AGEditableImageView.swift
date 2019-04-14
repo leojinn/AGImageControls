@@ -215,11 +215,11 @@ class AGEditableImageView: UIImageView {
         self.lastMaskColor = self.maskColor
     }
     
-    func showHideImageView () {
+    @objc func showHideImageView () {
         self.delegate?.imageDidTouch(imageView: self)
     }
     
-    func moveEditableImageView (_ gestureRecognizer : UIPanGestureRecognizer) {
+    @objc func moveEditableImageView (_ gestureRecognizer : UIPanGestureRecognizer) {
         if (!self.isActive) { return }
         let touchLocation = gestureRecognizer.location(in: self.superview)
         switch gestureRecognizer.state {
@@ -237,26 +237,25 @@ class AGEditableImageView: UIImageView {
         }
     }
     
-    func openTextEditor (_ gestureRecognizer : UITapGestureRecognizer) {
+    @objc func openTextEditor (_ gestureRecognizer : UITapGestureRecognizer) {
         if (!self.isActive) { return }
         guard let position = self.newPosition else { return }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.245) {
             self.delegate?.showTextEditor(imageView: self)
         }
-
-        UIView.animate(withDuration: 0.5, animations: { _ in
+        UIView.animate(withDuration: 0.5) {
             self.transform = CGAffineTransform.identity.rotated(by: 0).scaledBy(x: 1.0 / position.scale, y: 1.0 / position.scale)
             self.frame.origin = CGPoint(x: AGTextEditorView.ViewSizes.textViewRightLeftOffset, y: AGTextEditorView.ViewSizes.textViewLeftTopPoint.y)
             self.textView.alpha = 0
-        })
+        }
     }
     
     func updateImageWithAnimation () {
-        UIView.animate(withDuration: 0.3, animations: { _ in
+        UIView.animate(withDuration: 0.3) {
             self.updateTextSizes(scale: self.newPosition?.scale ?? 1.0)
             self.textView.alpha = 1.0
-        })
+        }
     }
     
     func modifiedScaling (scale : CGFloat) -> CGFloat {

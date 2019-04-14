@@ -102,7 +102,7 @@ class AGGradientFilterView: UIView {
         self.showWithAnimation(isShown: isShown, animated: animated)
     }
     
-    func sliderValueChanged (_ slider : UISlider) {
+    @objc func sliderValueChanged (_ slider : UISlider) {
         guard let item = self.selectedItem else { return }
         
         self.sliderValueLabel.text = "\(Int(slider.value))"
@@ -113,14 +113,14 @@ class AGGradientFilterView: UIView {
         }
     }
     
-    func okButtonDidTouch (_ button : UIButton) {
+    @objc func okButtonDidTouch (_ button : UIButton) {
         guard let item = self.selectedItem else { return }
         
         self.showSlider(isHidden: true)
         self.delegate?.applyGradientFilterButtonDidTouch(view: self, gradientFilterItem: item, value: Int(item.currentValue))
     }
     
-    func cancelButtonDidTouch (_ button : UIButton) {
+    @objc func cancelButtonDidTouch (_ button : UIButton) {
         guard let item = self.selectedItem else { return }
         
         self.delegate?.updateGradientFilter(view: self, gradientFilterItem: item, value: Int(item.defaultValue))
@@ -133,8 +133,8 @@ extension AGGradientFilterView
 {
     fileprivate func configureImageAdjustmentView() {
         [collectionView, cancelButton, okButton, sliderValueLabel, slider].forEach {
-            self.addSubview($0 as! UIView)
-            ($0 as! UIView).translatesAutoresizingMaskIntoConstraints = false
+            self.addSubview($0 )
+            ($0 ).translatesAutoresizingMaskIntoConstraints = false
         }
         self.setupConstraints()
     }
@@ -152,7 +152,7 @@ extension AGGradientFilterView
     {
         self.collectionView.hide(isHidden: !isHidden)
         [okButton, cancelButton, sliderValueLabel, slider].forEach {
-            ($0 as! UIView).showWithAnimation(isShown: !isHidden, animated: true)
+            ($0 ).showWithAnimation(isShown: !isHidden, animated: true)
         }
     }
     

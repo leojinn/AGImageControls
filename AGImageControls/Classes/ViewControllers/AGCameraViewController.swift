@@ -104,18 +104,18 @@ class AGCameraViewController: AGMainViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        previewLayer?.connection.videoOrientation = .portrait
+        previewLayer?.connection?.videoOrientation = .portrait
     }
 }
 
 extension AGCameraViewController
 {
     func setupPreviewLayer() {
-        guard let layer = AVCaptureVideoPreviewLayer(session: phoneCamera.session) else { return }
+        let layer = AVCaptureVideoPreviewLayer(session: phoneCamera.session) 
         
         layer.backgroundColor = configurator.mainColor.cgColor
         layer.autoreverses = true
-        layer.videoGravity = AVLayerVideoGravityResizeAspectFill
+        layer.videoGravity = AVLayerVideoGravity(rawValue: convertFromAVLayerVideoGravity(AVLayerVideoGravity.resizeAspectFill))
         
         self.view.layer.insertSublayer(layer, at: 0)
         layer.frame = view.layer.frame
@@ -125,9 +125,9 @@ extension AGCameraViewController
     
     // MARK: - Actions
     
-    func settingsButtonDidTap() {
+    @objc func settingsButtonDidTap() {
         DispatchQueue.main.async {
-            if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
+            if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
                 UIApplication.shared.openURL(settingsURL)
             }
         }
@@ -136,7 +136,7 @@ extension AGCameraViewController
     // MARK: - Camera actions
     
     func rotateCamera() {
-        UIView.animate(withDuration: 0.3, animations: { _ in
+        UIView.animate(withDuration: 0.3, animations: { 
             self.containerView.alpha = 1
         }, completion: { _ in
             self.phoneCamera.switchCamera {
@@ -148,7 +148,7 @@ extension AGCameraViewController
     }
     
     func flashCamera(_ title: String) {
-        let mapping: [String: AVCaptureFlashMode] = [
+        let mapping: [String: AVCaptureDevice.FlashMode] = [
             self.configurator.flashButtonOnTitle  : .on,
             self.configurator.flashButtonOffTitle : .off
         ]
@@ -173,7 +173,7 @@ extension AGCameraViewController
     
     // MARK: - Timer methods
     
-    func timerDidFire() {
+    @objc func timerDidFire() {
         UIView.animate(withDuration: 0.3, animations: { [unowned self] in
             self.focusImageView.alpha = 0
             }, completion: { _ in
@@ -190,7 +190,7 @@ extension AGCameraViewController
         phoneCamera.focus(convertedPoint)
         
         focusImageView.center = point
-        UIView.animate(withDuration: 0.245, animations: { _ in
+        UIView.animate(withDuration: 0.245, animations: { 
             self.focusImageView.alpha = 1
             self.focusImageView.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
         }, completion: { _ in
@@ -204,7 +204,7 @@ extension AGCameraViewController
     
     // MARK: - Tap
     
-    func tapGestureRecognizerHandler(_ gesture: UITapGestureRecognizer) {
+    @objc func tapGestureRecognizerHandler(_ gesture: UITapGestureRecognizer) {
         let touch = gesture.location(in: view)
         
         self.focusImageView.transform = CGAffineTransform.identity
@@ -240,3 +240,8 @@ extension AGCameraViewController : AGPhoneCameraDelegate
     
 }
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromAVLayerVideoGravity(_ input: AVLayerVideoGravity) -> String {
+	return input.rawValue
+}

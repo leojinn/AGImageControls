@@ -74,7 +74,7 @@ class AGColorEditorView: UIView {
             let colors = self.dataSource?.colorEditorMenuItems().filter{ $0.color == item.color }
             if let firstColor = colors?.first {
                 firstColor.currentValue = item.currentValue
-                if let index = self.dataSource?.colorEditorMenuItems().index(of: firstColor) {
+                if let index = self.dataSource?.colorEditorMenuItems().firstIndex(of: firstColor) {
                     self.collectionView.scrollToItem(at: IndexPath.init(row: index, section: 0), at: .centeredHorizontally, animated: !self.isHidden)
                 }
             }
@@ -94,7 +94,7 @@ class AGColorEditorView: UIView {
         self.showWithAnimation(isShown: toShow, animated: animated)
     }
     
-    func sliderValueChanged (_ slider : UISlider) {
+    @objc func sliderValueChanged (_ slider : UISlider) {
         guard let item = self.selectedItem else {
             return
         }

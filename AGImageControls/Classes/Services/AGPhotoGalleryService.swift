@@ -138,7 +138,7 @@ open class AGPhotoGalleryService: UIView {
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(AGPhotoGalleryService.image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     
-    func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
             print("===>>> AGPhotoGalleryService: Error saving image to the photo gallery : \n \(error.localizedDescription)")
         } else {
@@ -179,7 +179,7 @@ extension AGPhotoGalleryService
                                                 preferredStyle: .alert)
         
         let alertAction = UIAlertAction(title: self.configurator.okButtonTitle.capitalized, style: .default) { _ in
-            if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
+            if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
                 UIApplication.shared.openURL(settingsURL)
                 return
             }

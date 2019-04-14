@@ -146,8 +146,8 @@ extension AGImageEditingViewController
     fileprivate func configureImageEditingViewController() {
         self.view.backgroundColor = self.configurator.mainColor
         [self.scrollImageView, self.navigationView,  self.gradientView, self.settingsMenuCollectionView, self.imageAdjustmentView, self.gradientFilterView, self.imageMasksView, self.activityView].forEach {
-            ($0 as! UIView).translatesAutoresizingMaskIntoConstraints = false
-            self.view.addSubview($0 as! UIView)
+            ($0 ).translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview($0 )
         }
         self.setupConstraints()
     }

@@ -25,19 +25,19 @@ extension AGCameraBottomView {
     
     func setupConstraints() {
         
-        for attribute: NSLayoutAttribute in [.centerX] {
+        for attribute: NSLayoutConstraint.Attribute in [.centerX] {
             addConstraint(NSLayoutConstraint(item: snapButton, attribute: attribute, relatedBy: .equal,
                                              toItem: self, attribute: attribute, multiplier: 1,
                                              constant: 0))
         }
         
-        for attribute: NSLayoutAttribute in [.centerY] {
+        for attribute: NSLayoutConstraint.Attribute in [.centerY] {
             addConstraint(NSLayoutConstraint(item: snapButton, attribute: attribute, relatedBy: .equal,
                                              toItem: self, attribute: attribute, multiplier: 1,
                                              constant: -((photoGalleryView.frame.height - photoGalleryView.imageView.frame.width) / 3)))
         }
         
-        for attribute: NSLayoutAttribute in [.width, .height] {
+        for attribute: NSLayoutConstraint.Attribute in [.width, .height] {
             addConstraint(NSLayoutConstraint(item: snapButton, attribute: attribute, relatedBy: .equal,
                                              toItem: nil, attribute: .notAnAttribute, multiplier: 1,
                                              constant: snapButton.frame.size.width))
@@ -75,7 +75,7 @@ extension AGCameraTopView {
         
         for button in buttons
         {
-            guard let index : Int = buttons.index(of: button) else { return }
+            guard let index : Int = buttons.firstIndex(of: button) else { return }
             
             addConstraint(NSLayoutConstraint(item: button, attribute: .width, relatedBy: .equal,
                                              toItem: nil, attribute: .notAnAttribute, multiplier: 1,
@@ -98,8 +98,8 @@ extension AGCameraTopView {
 extension AGCameraSnapViewController {
     
     func setupConstraints() {
-        let attributes: [NSLayoutAttribute] = [.bottom, .right, .width]
-        let topViewAttributes: [NSLayoutAttribute] = [.left, .top, .width]
+        let attributes: [NSLayoutConstraint.Attribute] = [.bottom, .right, .width]
+        let topViewAttributes: [NSLayoutConstraint.Attribute] = [.left, .top, .width]
         
         for attribute in attributes {
             view.addConstraint(NSLayoutConstraint(item: bottomContainer, attribute: attribute,
@@ -107,8 +107,8 @@ extension AGCameraSnapViewController {
                                                   multiplier: 1, constant: 0))
         }
         
-        for attribute: NSLayoutAttribute in [.left, .top, .width] {
-            view.addConstraint(NSLayoutConstraint(item: cameraController.view, attribute: attribute,
+        for attribute: NSLayoutConstraint.Attribute in [.left, .top, .width] {
+            view.addConstraint(NSLayoutConstraint(item: cameraController.view!, attribute: attribute,
                                                   relatedBy: .equal, toItem: view, attribute: attribute,
                                                   multiplier: 1, constant: 0))
         }
@@ -127,7 +127,7 @@ extension AGCameraSnapViewController {
                                               relatedBy: .equal, toItem: nil, attribute: .notAnAttribute,
                                               multiplier: 1, constant: AGCameraTopView.ViewSizes.height))
         
-        view.addConstraint(NSLayoutConstraint(item: cameraController.view, attribute: .height,
+        view.addConstraint(NSLayoutConstraint(item: cameraController.view!, attribute: .height,
                                               relatedBy: .equal, toItem: view, attribute: .height,
                                               multiplier: 1, constant: 0))
     }
@@ -135,7 +135,7 @@ extension AGCameraSnapViewController {
 
 extension AGPhotoGalleryViewController {
     func setupConstraints() {
-        for attribute: NSLayoutAttribute in [.left, .top, .right] {
+        for attribute: NSLayoutConstraint.Attribute in [.left, .top, .right] {
             view.addConstraint(NSLayoutConstraint(item: navigationView, attribute: attribute,
                                                   relatedBy: .equal, toItem: view, attribute: attribute,
                                                   multiplier: 1, constant: 0))
@@ -145,7 +145,7 @@ extension AGPhotoGalleryViewController {
                                               relatedBy: .equal, toItem: nil, attribute: .notAnAttribute,
                                               multiplier: 1, constant: AGNavigationView.ViewSizes.viewHeight))
         
-        for attribute: NSLayoutAttribute in [.left, .right, .bottom, .top] {
+        for attribute: NSLayoutConstraint.Attribute in [.left, .right, .bottom, .top] {
             view.addConstraint(NSLayoutConstraint(item: photoGalleryCollectionView, attribute: attribute,
                                                   relatedBy: .equal, toItem: view, attribute: attribute,
                                                   multiplier: 1, constant: 0))
@@ -157,7 +157,7 @@ extension AGPhotoGalleryViewController {
 extension AGPhotoResizeViewController {
     
     func setupConstraints() {
-        for attribute: NSLayoutAttribute in [.left, .top, .right] {
+        for attribute: NSLayoutConstraint.Attribute in [.left, .top, .right] {
             view.addConstraint(NSLayoutConstraint(item: navigationView, attribute: attribute,
                                                   relatedBy: .equal, toItem: view, attribute: attribute,
                                                   multiplier: 1, constant: 0))
@@ -167,13 +167,13 @@ extension AGPhotoResizeViewController {
                                               relatedBy: .equal, toItem: nil, attribute: .notAnAttribute,
                                               multiplier: 1, constant: AGNavigationView.ViewSizes.viewHeight))
         
-        for attribute: NSLayoutAttribute in [.left, .right, .bottom, .top] {
+        for attribute: NSLayoutConstraint.Attribute in [.left, .right, .bottom, .top] {
             view.addConstraint(NSLayoutConstraint(item: scrollView, attribute: attribute,
                                                   relatedBy: .equal, toItem: view, attribute: attribute,
                                                   multiplier: 1, constant: 0))
         }
         
-        for attribute: NSLayoutAttribute in [.centerX, .centerY] {
+        for attribute: NSLayoutConstraint.Attribute in [.centerX, .centerY] {
             view.addConstraint(NSLayoutConstraint(item: activityView, attribute: attribute, relatedBy: .equal,
                                                   toItem: self.view, attribute: attribute, multiplier: 1,
                                                   constant: 0))
@@ -208,7 +208,7 @@ extension AGNavigationView
                                          toItem: doneButton, attribute: .right, multiplier: 1,
                                          constant: ViewSizes.rightOffset))
         
-        for attribute: NSLayoutAttribute in [.top, .bottom]
+        for attribute: NSLayoutConstraint.Attribute in [.top, .bottom]
         {
             for button in [backButton, doneButton]
             {
@@ -225,7 +225,7 @@ extension AGImageEditingViewController
 {
     func setupConstraints()
     {
-        for attribute: NSLayoutAttribute in [.left, .right] {
+        for attribute: NSLayoutConstraint.Attribute in [.left, .right] {
             view.addConstraint(NSLayoutConstraint(item: navigationView, attribute: attribute,
                                                   relatedBy: .equal, toItem: view, attribute: attribute,
                                                   multiplier: 1, constant: 0))
@@ -236,7 +236,7 @@ extension AGImageEditingViewController
                                                          multiplier: 1, constant: 0)
         view.addConstraint(navigationViewTopConstraint!)
         
-        for attribute: NSLayoutAttribute in [.left, .bottom, .right] {
+        for attribute: NSLayoutConstraint.Attribute in [.left, .bottom, .right] {
             view.addConstraint(NSLayoutConstraint(item: gradientView, attribute: attribute,
                                                   relatedBy: .equal, toItem: view, attribute: attribute,
                                                   multiplier: 1, constant: 0))
@@ -267,7 +267,7 @@ extension AGImageEditingViewController
                                               relatedBy: .equal, toItem: nil, attribute: .notAnAttribute,
                                               multiplier: 1, constant: AGSettingsMenuCollectionView.ViewSizes.height))
         
-        for attribute: NSLayoutAttribute in [.left, .right] {
+        for attribute: NSLayoutConstraint.Attribute in [.left, .right] {
             view.addConstraint(NSLayoutConstraint(item: settingsMenuCollectionView, attribute: attribute,
                                                   relatedBy: .equal, toItem: view, attribute: attribute,
                                                   multiplier: 1, constant: 0))
@@ -317,7 +317,7 @@ extension AGSettingsMenuCollectionViewCell
 {
     func setupConstraints()
     {
-        for attribute: NSLayoutAttribute in [.centerX, .centerY] {
+        for attribute: NSLayoutConstraint.Attribute in [.centerX, .centerY] {
             contentView.addConstraint(NSLayoutConstraint(item: imageView, attribute: attribute, relatedBy: .equal,
                                                          toItem: self.contentView, attribute: attribute, multiplier: 1,
                                                          constant: 0))
@@ -341,7 +341,7 @@ extension AGSettingsMenuCollectionViewCell
         
         contentView.addConstraints([underlineViewRightConstraint!, underlineViewLeftConstraint!])
         
-        for attribute: NSLayoutAttribute in [.width, .height] {
+        for attribute: NSLayoutConstraint.Attribute in [.width, .height] {
             addConstraint(NSLayoutConstraint(item: imageView, attribute: attribute, relatedBy: .equal,
                                              toItem: nil, attribute: .notAnAttribute, multiplier: 1,
                                              constant: ViewSizes.imageViewSize.width))
@@ -354,7 +354,7 @@ extension AGImageAdjustmentCollectionViewCell
 {
     func setupConstraints()
     {
-        for attribute: NSLayoutAttribute in [.bottom, .right] {
+        for attribute: NSLayoutConstraint.Attribute in [.bottom, .right] {
             contentView.addConstraint(NSLayoutConstraint(item: contentView, attribute: attribute,
                                                          relatedBy: .equal, toItem: titleLabel , attribute: attribute,
                                                          multiplier: 1, constant: ViewSizes.labelOffset))
@@ -413,7 +413,7 @@ extension AGImageAdjustmentView
 {
     func setupConstraints()
     {
-        for attribute: NSLayoutAttribute in [.left, .top, .right, .bottom] {
+        for attribute: NSLayoutConstraint.Attribute in [.left, .top, .right, .bottom] {
             addConstraint(NSLayoutConstraint(item: collectionView, attribute: attribute,
                                              relatedBy: .equal, toItem: self, attribute: attribute,
                                              multiplier: 1, constant: 0))
@@ -430,7 +430,7 @@ extension AGImageAdjustmentView
                                          relatedBy: .equal, toItem: self, attribute: .left,
                                          multiplier: 1, constant: 8))
         
-        for attribute: NSLayoutAttribute in [.height, .width] {
+        for attribute: NSLayoutConstraint.Attribute in [.height, .width] {
             for subview in [cancelButton, okButton] as [UIView]
             {
                 addConstraint(NSLayoutConstraint(item: subview, attribute: attribute,
@@ -466,7 +466,7 @@ extension AGGradientFilterView
 {
     func setupConstraints()
     {
-        for attribute: NSLayoutAttribute in [.left, .top, .right, .bottom] {
+        for attribute: NSLayoutConstraint.Attribute in [.left, .top, .right, .bottom] {
             addConstraint(NSLayoutConstraint(item: collectionView, attribute: attribute,
                                              relatedBy: .equal, toItem: self, attribute: attribute,
                                              multiplier: 1, constant: 0))
@@ -483,7 +483,7 @@ extension AGGradientFilterView
                                          relatedBy: .equal, toItem: self, attribute: .left,
                                          multiplier: 1, constant: 8))
         
-        for attribute: NSLayoutAttribute in [.height, .width] {
+        for attribute: NSLayoutConstraint.Attribute in [.height, .width] {
             for subview in [cancelButton, okButton] as [UIView]
             {
                 addConstraint(NSLayoutConstraint(item: subview, attribute: attribute,
@@ -521,7 +521,7 @@ extension AGScrollImageView
 {
     func setupConstraints()
     {
-        for attribute: NSLayoutAttribute in [.left, .right, .bottom, .top] {
+        for attribute: NSLayoutConstraint.Attribute in [.left, .right, .bottom, .top] {
             addConstraint(NSLayoutConstraint(item: scrollView, attribute: attribute,
                                              relatedBy: .equal, toItem: self, attribute: attribute,
                                              multiplier: 1, constant: 0))
@@ -536,7 +536,7 @@ extension AGImageEditorViewController
     func setupConstraints()
     {
         //Navigation constraints
-        for attribute: NSLayoutAttribute in [.left, .right] {
+        for attribute: NSLayoutConstraint.Attribute in [.left, .right] {
             view.addConstraint(NSLayoutConstraint(item: navigationView, attribute: attribute,
                                                   relatedBy: .equal, toItem: view, attribute: attribute,
                                                   multiplier: 1, constant: 0))
@@ -588,7 +588,7 @@ extension AGImageEditorViewController
                                               relatedBy: .equal, toItem: nil, attribute: .notAnAttribute,
                                               multiplier: 1, constant: AGColorEditorView.ViewSizes.height))
         
-        for attribute: NSLayoutAttribute in [.left, .bottom, .right] {
+        for attribute: NSLayoutConstraint.Attribute in [.left, .bottom, .right] {
             view.addConstraint(NSLayoutConstraint(item: gradientView, attribute: attribute,
                                                   relatedBy: .equal, toItem: view, attribute: attribute,
                                                   multiplier: 1, constant: 0))
@@ -599,19 +599,19 @@ extension AGImageEditorViewController
                                                           multiplier: 1, constant: 0)
         view.addConstraint(gradientViewHeightConstraint!)
         
-        for attribute: NSLayoutAttribute in [.left, .top, .width, .bottom] {
+        for attribute: NSLayoutConstraint.Attribute in [.left, .top, .width, .bottom] {
             view.addConstraint(NSLayoutConstraint(item: imageView, attribute: attribute,
                                                   relatedBy: .equal, toItem: view, attribute: attribute,
                                                   multiplier: 1, constant: 0))
         }
 
         
-        view.addConstraint(NSLayoutConstraint(item: view , attribute: .bottom,
+        view.addConstraint(NSLayoutConstraint(item: view! , attribute: .bottom,
                                               relatedBy: .equal, toItem: trashButton, attribute: .bottom,
                                               multiplier: 1, constant: AGImageEditorViewController.ViewSizes.trashButtonBottomOffset + AGImageEditorMainMenuCollectionView.ViewSizes.height))
 
         
-        view.addConstraint(NSLayoutConstraint(item: view , attribute: .right,
+        view.addConstraint(NSLayoutConstraint(item: view! , attribute: .right,
                                               relatedBy: .equal, toItem: trashButton, attribute: .right,
                                               multiplier: 1, constant: AGImageEditorViewController.ViewSizes.trashButtonRightOffset))
 
@@ -634,7 +634,7 @@ extension AGImageEditorMainMenuCollectionViewCell
 {
     func setupConstraints ()
     {
-        for attribute: NSLayoutAttribute in [.centerX, .centerY] {
+        for attribute: NSLayoutConstraint.Attribute in [.centerX, .centerY] {
             contentView.addConstraint(NSLayoutConstraint(item: titleLabel, attribute: attribute, relatedBy: .equal,
                                                          toItem: contentView, attribute: attribute, multiplier: 1,
                                                          constant: 0))
@@ -654,13 +654,13 @@ extension AGFontEditorView
 {
     func setupConstraints ()
     {
-        for attribute: NSLayoutAttribute in [.left, .right, .top] {
+        for attribute: NSLayoutConstraint.Attribute in [.left, .right, .top] {
             self.addConstraint(NSLayoutConstraint(item: collectionView, attribute: attribute,
                                                   relatedBy: .equal, toItem: self, attribute: attribute,
                                                   multiplier: 1, constant: 0))
             
         }
-        for attribute: NSLayoutAttribute in [.left, .right, .bottom] {
+        for attribute: NSLayoutConstraint.Attribute in [.left, .right, .bottom] {
             self.addConstraint(NSLayoutConstraint(item: titleLabel, attribute: attribute,
                                                   relatedBy: .equal, toItem: self, attribute: attribute,
                                                   multiplier: 1, constant: 0))
@@ -688,7 +688,7 @@ extension AGColorEditorView
 {
     func setupConstraints ()
     {
-        for attribute: NSLayoutAttribute in [.left, .right, .top] {
+        for attribute: NSLayoutConstraint.Attribute in [.left, .right, .top] {
             addConstraint(NSLayoutConstraint(item: collectionView, attribute: attribute,
                                              relatedBy: .equal, toItem: self, attribute: attribute,
                                              multiplier: 1, constant: 0))
@@ -758,7 +758,7 @@ extension AGImageMasksView
                                          relatedBy: .equal, toItem: undoButton, attribute: .left,
                                          multiplier: 1, constant: -ViewSizes.buttonRightOffset))
         
-        for attribute : NSLayoutAttribute in [.height, .width]
+        for attribute : NSLayoutConstraint.Attribute in [.height, .width]
         {
             addConstraint(NSLayoutConstraint(item: addNewImageButton, attribute: attribute,
                                              relatedBy: .equal, toItem: nil, attribute: .notAnAttribute,
@@ -800,7 +800,7 @@ extension AGImageMasksView
                                          relatedBy: .equal, toItem: captionTextButton, attribute: .right,
                                          multiplier: 1, constant: ViewSizes.titleLabelOffset))
         
-        for attribute: NSLayoutAttribute in [.left, .right] {
+        for attribute: NSLayoutConstraint.Attribute in [.left, .right] {
             addConstraint(NSLayoutConstraint(item: shapesMenuCollectionView, attribute: attribute,
                                              relatedBy: .equal, toItem: self, attribute: attribute,
                                              multiplier: 1, constant: 0))
@@ -841,7 +841,7 @@ extension AGShapesMenuCollectionViewCell
 
 extension AGTextEditorView {
     func setupConstraints () {
-        for attribute: NSLayoutAttribute in [.left, .top, .right] {
+        for attribute: NSLayoutConstraint.Attribute in [.left, .top, .right] {
                 addConstraint(NSLayoutConstraint(item: navigationView, attribute: attribute,
                                                   relatedBy: .equal, toItem: self, attribute: attribute,
                                                   multiplier: 1, constant: 0))

@@ -58,15 +58,11 @@ class AGImageAdjustmentCollectionViewCell: AGMainCollectionViewCell {
                                                borderWidth: menuItem.currentValue != menuItem.defaultValue ? 1.0 : 0.0,
                                                borderColor: menuItem.currentValue != menuItem.defaultValue ? UIColor.white : UIColor.clear)
     }
-
-}
-
-extension AGImageAdjustmentCollectionViewCell {
     
     override func setupCollectionViewCell() {
         [imageView, titleLabel].forEach {
-            ($0 as! UIView).translatesAutoresizingMaskIntoConstraints = false
-            contentView.addSubview($0 as! UIView)
+            ($0 ).translatesAutoresizingMaskIntoConstraints = false
+            contentView.addSubview($0 )
         }
         setupConstraints()
     }

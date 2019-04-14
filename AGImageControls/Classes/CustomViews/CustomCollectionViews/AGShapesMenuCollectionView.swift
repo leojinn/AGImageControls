@@ -25,9 +25,6 @@ class AGShapesMenuCollectionView: AGMainCollectionView {
     struct ViewSizes {
         static let height: CGFloat = AGShapesMenuCollectionViewCell.cellSize().height
     }
-}
-
-extension AGShapesMenuCollectionView {
     
     override func registerCollectionViewCells () {
         self.register(AGShapesMenuCollectionViewCell.self, forCellWithReuseIdentifier: AGShapesMenuCollectionViewCell.id)
@@ -55,5 +52,4 @@ extension AGShapesMenuCollectionView {
     override func didSelectItemAtIndexPath (indexPath : IndexPath) {
         self.shapesMenuCollectionViewDelegate?.selectedItem(shapesMenuCollectionView: self, atIndexPath: indexPath)
     }
-    
 }

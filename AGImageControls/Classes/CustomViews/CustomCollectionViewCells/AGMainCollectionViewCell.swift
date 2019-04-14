@@ -30,11 +30,8 @@ class AGMainCollectionViewCell: UICollectionViewCell, AGCellInterface {
     func configureForObject (object : Any?) {
         
     }
-}
-
-extension AGMainCollectionViewCell {
-
+    
     func setupCollectionViewCell() {
+        
     }
-
 }

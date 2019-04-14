@@ -79,11 +79,11 @@ open class AGCameraBottomView: UIView {
     }
     
     // MARK: - Action methods
-    func snapButtonDidPress (_ button : UIButton) {
+    @objc func snapButtonDidPress (_ button : UIButton) {
         self.delegate?.cameraBottomViewSnapButtonDidTouch(view:self)
     }
     
-    func rotateCameraButtonDidPress(_ button: UIButton) {
+    @objc func rotateCameraButtonDidPress(_ button: UIButton) {
         self.delegate?.cameraBottomViewRotateCameraButtonDidTouch(view: self)
     }
     
@@ -108,8 +108,8 @@ open class AGCameraBottomView: UIView {
 extension AGCameraBottomView {
     func configureCameraBottomView () {
         [snapButton, rotateCameraButton, photoGalleryView].forEach {
-            addSubview($0 as! UIView)
-            ($0 as! UIView).translatesAutoresizingMaskIntoConstraints = false
+            addSubview($0 )
+            ($0 ).translatesAutoresizingMaskIntoConstraints = false
         }
         backgroundColor = .clear
         setupConstraints()

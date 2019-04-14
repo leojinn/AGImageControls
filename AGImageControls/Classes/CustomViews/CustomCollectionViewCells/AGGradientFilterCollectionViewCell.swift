@@ -38,9 +38,6 @@ class AGGradientFilterCollectionViewCell: AGMainCollectionViewCell {
 
         self.imageView.image = AGAppResourcesService.getImage(gradientItem.iconName)
     }
-}
-
-extension AGGradientFilterCollectionViewCell {
     
     override func setupCollectionViewCell() {
         self.contentView.addSubview(imageView)
